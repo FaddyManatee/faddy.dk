@@ -1,0 +1,10 @@
+html, body {
+    margin: 0;
+    overflow: hidden;
+}
+
+
+/* Avoid scrollbars on Firefox when <canvas> fills entire webpage */
+canvas {
+    display: block;
+}
