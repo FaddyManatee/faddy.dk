@@ -47,155 +47,45 @@ function RandomRectangle(width, height) {
 
 // Generates a random vector for the rectangle to move along in which it will hit a canvas edge
 function RandomVector(rect) {
-    var rndX = 0;
-    var rndY = 0;
+    // Pick a random edge
+    var edge = Math.floor(Math.random() * 4);
 
-    // Math.round(Math.random()); generates a random number 0-1 inclusive
-    // Determine a general x direction (left, right)
-    var xDirection = Math.round(Math.random());
-
-    // Determine a general y direction (up, down)
-    var yDirection = Math.round(Math.random());
-
-    const limit = 500;
-    var max = 0;
-    var min = 0;
-
-    // Generate a coordinate on the edge or outside of the canvas space using the general directions
-    if (yDirection == 0) {
-        // Down
-        max = (canvasHeight - 1) + limit;
-        min = canvasHeight - 1;
-
-        rndY = Math.floor(Math.random() * (max - min + 1) ) + min;
-    }
-    else {
-        // Up
-        max = 0;
-        min = -limit;
-
-        rndY = Math.floor(Math.random() * (max - min + 1) ) + min;
-    }
-
-    if (xDirection == 0) {
-        // Right
-        max = (canvasWidth - 1) + limit;
-        min = canvasWidth - 1;
-
-        rndX = Math.floor(Math.random() * (max - min + 1) ) + min;
-    }
-    else {
-        // Left
-        max = 0;
-        min = -limit;
-
-        rndX = Math.floor(Math.random() * (max - min + 1) ) + min;
-    }
-
-    var coordinate = {x: rndX, y: rndY};
-    console.log(coordinate);
-
-    // Check each edge of the canvas for an intersection of the line between the rectangle position and the generated coordinate
-    const canvasEdges = [{pos1: {x: 0, y: 0} , pos2: {x: canvasWidth - 1, y: 0}},
-                         {pos1: {x: 0, y: canvasHeight - 1} , pos2: {x: canvasWidth - 1, y: canvasHeight - 1}},
-                         {pos1: {x: 0, y: 0} , pos2: {x: 0, y: canvasHeight - 1}},
-                         {pos1: {x: canvasWidth - 1, y: 0} , pos2: {x: canvasWidth - 1, y: canvasHeight - 1}}];
-
+    var rndPoint;
     var intersection;
 
-    // TEST
-    console.log(canvasWidth);
-    console.log(canvasHeight);
-
-    for (var x = 0; x < canvasEdges.length; x++) {
-        intersection = FindIntersection({pos1: {x: rect.x, y: rect.y}, pos2: coordinate}, canvasEdges[x]);
-
-        // If the intersection is not within the canvas, continue
-        if (intersection.x < 0 || intersection.x > canvasWidth - 1 || intersection.y < 0 || intersection.y > canvasHeight - 1)
-        {
-            // TEST
-            console.log(intersection);
-            continue;
-        }
-
-        // Break if there exists a valid intersection
-        if (intersection.x == 0 || intersection.x == canvasWidth - 1 || intersection.y == 0 || intersection.y == canvasHeight - 1) {
-            // TEST
-            console.log(intersection);
-            g.lineTo(intersection.x, intersection.y);
-            g.moveTo(intersection.x + 20, intersection.y);
-            g.arc(intersection.x, intersection.y, 20, 0, 2 * Math.PI);
-            g.stroke();
-            g.moveTo(rect.x, rect.y);
+    switch (edge) {
+        case 0:
+            // Pick a random point along the top edge
+            rndPoint = Math.floor(Math.random() * canvasWidth);
+            intersection = {x: rndPoint, y: 0};
             break;
-        }
-        else {
-            // TEST
-            console.log(intersection);
-        }
+    
+        case 1:
+            // Pick a random point along the bottom edge
+            rndPoint = Math.floor(Math.random() * canvasWidth);
+            intersection = {x: rndPoint, y: canvasHeight - 1};
+            break;
+        
+        case 2:
+            // Pick a random point along the left edge
+            rndPoint = Math.floor(Math.random() * canvasHeight);
+            intersection = {x: 0, y: rndPoint};
+            break;
+        
+        case 3:
+            // Pick a random point along the right edge
+            rndPoint = Math.floor(Math.random() * canvasHeight);
+            intersection = {x: canvasWidth - 1, y: rndPoint};
+            break;
     }
+
+    // TEST - rect will no longer be needed as a parameter
+    g.lineTo(intersection.x, intersection.y);
+    g.moveTo(intersection.x + 20, intersection.y);
+    g.arc(intersection.x, intersection.y, 20, 0, 2 * Math.PI);
+    g.stroke();
+    g.moveTo(rect.x, rect.y);
+
 
     // Calculate the vector that brings the rectangle to the intersection and return it
-}
-
-
-// Finds the intersection between two lines, a and b. Returns undefined if no intersect was found
-function FindIntersection(a, b) {
-    var solutionX = undefined;
-    var solutionY = undefined;
-
-    var gradientA = (a.pos1.y - a.pos2.y) / (a.pos1.x - a.pos2.x);
-    var gradientB = (b.pos1.y - b.pos2.y) / (b.pos1.x - b.pos2.x);
-
-    // The lines are parallel and will not meet
-    if (gradientA == gradientB || (Math.abs(gradientA) == Infinity && Math.abs(gradientB) == Infinity))
-        return undefined;
-
-    // c = y - mx
-    var interceptA = a.pos1.y - (gradientA * a.pos1.x);
-    var interceptB = b.pos1.y - (gradientB * b.pos1.x);
-
-    // Handle cases for vertical lines
-    if (Math.abs(gradientA) == Infinity) {
-        solutionX = a.pos1.x;
-        solutionY = (gradientB * solutionX) + interceptB;
-
-        return {x: solutionX, y: solutionY};
-    }
-    else if (Math.abs(gradientB) == Infinity) {
-        solutionX = b.pos1.x;
-        solutionY = (gradientA * solutionX) + interceptA;
-
-        return {x: solutionX, y: solutionY};
-    }
-
-    // We now have enough information to solve the simultaneous equations a and b (both of the form y=mx+c)
-    // We start with maxa + ca = mbxb + cb
-    var ma = gradientA;
-    var mb = gradientB;
-    var ca = interceptA;
-    var cb = interceptB;
-
-    // Move ca onto RHS
-    if (ca > 0) {
-        cb = cb - ca;
-    }
-    else if (ca < 0) {
-        cb = cb + ca;
-    }
-
-    // Move mbxb onto LHS
-    if (mb > 0) {
-        ma = ma - mb;
-    }
-    else if (mb < 0) {
-        ma = ma + mb;
-    }
-
-    solutionX = cb / ma;
-
-    // Use one of the line equations to find a solution for y
-    solutionY = (gradientA * solutionX) + interceptA;
-    
-    return {x: solutionX, y: solutionY};
 }
