@@ -2,8 +2,11 @@
  * The goal of this script is to imitate the "Bouncing DVD logo" effect 
  */
 
-var canvasWidth = 0;
-var canvasHeight = 0;
+var canvas;
+var animationRequest;
+var rectangle;
+var vector;
+var gradient;
 var g;
 
 $(document).ready(function() {
@@ -13,17 +16,22 @@ $(document).ready(function() {
     // Make the canvas fill the entire webpage
     canvas.width = $(window).width();
     canvas.height = $(window).height();
-    canvasWidth = canvas.width;
-    canvasHeight = canvas.height;
 
     // Graphics drawing context setup
     g = canvas.getContext("2d");
     
     // Draw a test rectangle
-    var rectangle = RandomRectangle(300, 100);
+    rectangle = RandomRectangle(125, 125);
 
     // Initial vector to move the rectangle along to initiate the animation
-    var vector = RandomVector(rectangle);
+    vector = RandomVector(rectangle);
+
+    // Calculate the gradient of the vector relative to the rectangle
+    gradient = ((rectangle.y + vector.dy) - rectangle.y) / ((rectangle.x + vector.dx) - rectangle.x);
+    // Divide by 0?
+
+    animationRequest = window.requestAnimationFrame(Move);
+    // Calculate a new vector to perform the ricochet and repeat
 });
 
 
@@ -33,8 +41,8 @@ function RandomRectangle(width, height) {
     var rndColumn;
 
     // Remove coordinate space where the rectangle cannot be fully drawn from the random selection
-    rndRow = Math.floor(Math.random() * (canvasHeight - height));
-    rndColumn = Math.floor(Math.random() * (canvasWidth - width));
+    rndRow = Math.floor(Math.random() * (canvas.height - height));
+    rndColumn = Math.floor(Math.random() * (canvas.width - width));
 
     // Draw the rectangle
     g.rect(rndColumn, rndRow, width, height);
@@ -46,7 +54,7 @@ function RandomRectangle(width, height) {
 
 
 // Generates a random vector for the rectangle to move along in which it will hit a canvas edge
-function RandomVector(rect) {
+function RandomVector() {
     // Pick a random edge
     var edge = Math.floor(Math.random() * 4);
 
@@ -56,36 +64,96 @@ function RandomVector(rect) {
     switch (edge) {
         case 0:
             // Pick a random point along the top edge
-            rndPoint = Math.floor(Math.random() * canvasWidth);
+            rndPoint = Math.floor(Math.random() * canvas.width);
             intersection = {x: rndPoint, y: 0};
             break;
     
         case 1:
             // Pick a random point along the bottom edge
-            rndPoint = Math.floor(Math.random() * canvasWidth);
-            intersection = {x: rndPoint, y: canvasHeight - 1};
+            rndPoint = Math.floor(Math.random() * canvas.width);
+            intersection = {x: rndPoint, y: canvas.height - 1};
             break;
         
         case 2:
             // Pick a random point along the left edge
-            rndPoint = Math.floor(Math.random() * canvasHeight);
+            rndPoint = Math.floor(Math.random() * canvas.height);
             intersection = {x: 0, y: rndPoint};
             break;
         
         case 3:
             // Pick a random point along the right edge
-            rndPoint = Math.floor(Math.random() * canvasHeight);
-            intersection = {x: canvasWidth - 1, y: rndPoint};
+            rndPoint = Math.floor(Math.random() * canvas.height);
+            intersection = {x: canvas.width - 1, y: rndPoint};
             break;
     }
 
-    // TEST - rect will no longer be needed as a parameter
+    // TEST
     g.lineTo(intersection.x, intersection.y);
     g.moveTo(intersection.x + 20, intersection.y);
     g.arc(intersection.x, intersection.y, 20, 0, 2 * Math.PI);
     g.stroke();
-    g.moveTo(rect.x, rect.y);
+    g.moveTo(rectangle.x, rectangle.y);
 
 
     // Calculate the vector that brings the rectangle to the intersection and return it
+    // intersection - rect
+    return {dx: intersection.x - rectangle.x, dy: intersection.y - rectangle.y};
+}
+
+
+// Moves the rectangle along the vector v until the translation is complete or the rectangle collides with an edge
+function Move() {
+    g.beginPath();
+    g.fillStyle = "rgba(0, 0, 0, 0)";
+    g.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Handle vertical lines
+    if (gradient == Infinity) {
+        // Vertically upwards
+        gradient == 10000;
+    }
+    else if (gradient == -Infinity) {
+        // Vertically downwards
+        gradient == -10000;
+    }
+    else {
+        // Apply effects of gradient 
+        rectangle.x = rectangle.x + (vector.dx / Math.abs(vector.dx));
+        rectangle.y = rectangle.y + ((vector.dy / Math.abs(vector.dy)) * Math.abs(gradient));
+    }
+
+    // Decrement the vector accordingly
+    if (vector.dx > 0) {
+        vector.dx = vector.dx - 1;
+    }
+    else if (vector.dx < 0) {
+        vector.dx = vector.dx + 1;
+    }
+
+    if (vector.dy > 0) {
+        vector.dy = vector.dy - gradient;
+    }
+    else if (vector.dy < 0) {
+        vector.dy = vector.dy + gradient;
+    }
+
+    g.rect(rectangle.x, rectangle.y, rectangle.w, rectangle.h);
+    g.stroke();
+
+    /*
+     Floor and ceil functions on rectangle.y as it may become decimal due to the gradient, 
+     otherwise the animation will continue until the vector translation is complete
+    */
+    if (rectangle.x + rectangle.w == canvas.width || Math.ceil(rectangle.y) + rectangle.h == canvas.height || 
+        Math.floor(rectangle.y) + rectangle.h == canvas.height) {
+        // The rectangle has hit an edge of the canvas
+        cancelAnimationFrame(animationRequest);
+    }
+    else if (vector.dx == 0 || vector.dy == 0) {
+        // Vector translation is complete. The animation has ended
+        cancelAnimationFrame(animationRequest);
+    }
+    else {
+        requestAnimationFrame(Move);
+    }
 }
