@@ -9,6 +9,15 @@ var vector;
 var gradient;
 var g;
 
+// TEST
+var initial;
+// TEST/
+
+// STATS
+var start;
+var finish;
+// STATS/
+
 $(document).ready(function() {
     // Retrieve the canvas object to manipulate
     canvas = $("#errorcanvas")[0];
@@ -19,7 +28,7 @@ $(document).ready(function() {
 
     // Graphics drawing context setup
     g = canvas.getContext("2d");
-    
+
     // Draw a test rectangle
     rectangle = RandomRectangle(125, 125);
 
@@ -28,10 +37,16 @@ $(document).ready(function() {
 
     // Calculate the gradient of the vector relative to the rectangle
     gradient = ((rectangle.y + vector.dy) - rectangle.y) / ((rectangle.x + vector.dx) - rectangle.x);
-    // Divide by 0?
 
+    // STATS
+    start = new Date();
+    // STATS/
+
+    // Perform the animation
     animationRequest = window.requestAnimationFrame(Move);
-    // Calculate a new vector to perform the ricochet and repeat
+
+    // Calculate a new vector to perform the bounce and repeat
+    // ...
 });
 
 
@@ -48,6 +63,10 @@ function RandomRectangle(width, height) {
     g.rect(rndColumn, rndRow, width, height);
     g.stroke();
 
+    // TEST
+    initial = {x: rndColumn, y: rndRow};
+    // TEST/
+
     // Return its properties
     return {x: rndColumn, y: rndRow, w: width, h: height};
 }
@@ -59,8 +78,6 @@ function RandomVector() {
     var edge = Math.floor(Math.random() * 4);
 
     var rndPoint;
-    var intersection;
-
     switch (edge) {
         case 0:
             // Pick a random point along the top edge
@@ -93,7 +110,7 @@ function RandomVector() {
     g.arc(intersection.x, intersection.y, 20, 0, 2 * Math.PI);
     g.stroke();
     g.moveTo(rectangle.x, rectangle.y);
-
+    // TEST/
 
     // Calculate the vector that brings the rectangle to the intersection and return it
     // intersection - rect
@@ -110,11 +127,11 @@ function Move() {
     // Handle vertical lines
     if (gradient == Infinity) {
         // Vertically upwards
-        gradient == 10000;
+        gradient = 10000;
     }
     else if (gradient == -Infinity) {
         // Vertically downwards
-        gradient == -10000;
+        gradient = -10000;
     }
     else {
         // Apply effects of gradient 
@@ -122,23 +139,28 @@ function Move() {
         rectangle.y = rectangle.y + ((vector.dy / Math.abs(vector.dy)) * Math.abs(gradient));
     }
 
+    // Since gradient effects the speed of the animation, calculate a multiplier for consistent speed across all gradients (WIP)
+    var factor = 1;
+
     // Decrement the vector accordingly
     if (vector.dx > 0) {
-        vector.dx = vector.dx - 1;
+        vector.dx = vector.dx - factor;
     }
     else if (vector.dx < 0) {
-        vector.dx = vector.dx + 1;
+        vector.dx = vector.dx + factor;
     }
 
     if (vector.dy > 0) {
-        vector.dy = vector.dy - gradient;
+        vector.dy = vector.dy - (gradient * factor);
     }
     else if (vector.dy < 0) {
-        vector.dy = vector.dy + gradient;
+        vector.dy = vector.dy + (gradient * factor);
     }
 
+    // TEST
     g.rect(rectangle.x, rectangle.y, rectangle.w, rectangle.h);
     g.stroke();
+    // TEST/
 
     /*
      Floor and ceil functions on rectangle.y as it may become decimal due to the gradient, 
@@ -147,10 +169,34 @@ function Move() {
     if (rectangle.x + rectangle.w == canvas.width || Math.ceil(rectangle.y) + rectangle.h == canvas.height || 
         Math.floor(rectangle.y) + rectangle.h == canvas.height) {
         // The rectangle has hit an edge of the canvas
+
+        // STATS
+        console.log("Gradient: " + gradient);
+        finish = new Date();
+        var time = (finish.getTime() - start.getTime()) / 1000;
+        var distance = Math.sqrt(Math.pow(rectangle.x - initial.x, 2) + Math.pow(rectangle.y - initial.y, 2));
+        var speed = distance / time;
+        console.log("Distance: " + distance + "px");
+        console.log("Time: " + time + "s");
+        console.log("Speed: " + speed + "px/s");
+        // STATS/
+
         cancelAnimationFrame(animationRequest);
     }
     else if (vector.dx == 0 || vector.dy == 0) {
         // Vector translation is complete. The animation has ended
+        
+        // STATS
+        console.log("Gradient: " + gradient);
+        finish = new Date();
+        var time = (finish.getTime() - start.getTime()) / 1000;
+        var distance = Math.sqrt(Math.pow(rectangle.x - initial.x, 2) + Math.pow(rectangle.y - initial.y, 2));
+        var speed = distance / time; 
+        console.log("Distance: " + distance + "px");
+        console.log("Time: " + time + "s");
+        console.log("Speed: " + speed + "px/s");
+        // STATS/
+
         cancelAnimationFrame(animationRequest);
     }
     else {
