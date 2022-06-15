@@ -33,7 +33,7 @@ $(document).ready(function() {
     rectangle = RandomRectangle(125, 125);
 
     // Initial vector to move the rectangle along to initiate the animation
-    vector = RandomVector(rectangle);
+    vector = RandomVector();
 
     // Calculate the gradient of the vector relative to the rectangle
     gradient = ((rectangle.y + vector.dy) - rectangle.y) / ((rectangle.x + vector.dx) - rectangle.x);
@@ -113,7 +113,7 @@ function RandomVector() {
     // TEST/
 
     // Calculate the vector that brings the rectangle to the intersection and return it
-    // intersection - rect
+    // intersection - rectangle
     return {dx: intersection.x - rectangle.x, dy: intersection.y - rectangle.y};
 }
 
@@ -151,10 +151,10 @@ function Move() {
     }
 
     if (vector.dy > 0) {
-        vector.dy = vector.dy - (gradient * factor);
+        vector.dy = (vector.dy - gradient) * factor;
     }
     else if (vector.dy < 0) {
-        vector.dy = vector.dy + (gradient * factor);
+        vector.dy = (vector.dy + gradient) * factor;
     }
 
     // TEST
@@ -179,6 +179,8 @@ function Move() {
         console.log("Distance: " + distance + "px");
         console.log("Time: " + time + "s");
         console.log("Speed: " + speed + "px/s");
+        $("#gradient").text(gradient);
+        $("#speed").text(speed);
         // STATS/
 
         cancelAnimationFrame(animationRequest);
@@ -195,6 +197,8 @@ function Move() {
         console.log("Distance: " + distance + "px");
         console.log("Time: " + time + "s");
         console.log("Speed: " + speed + "px/s");
+        $("#gradient").text(gradient);
+        $("#speed").text(speed);
         // STATS/
 
         cancelAnimationFrame(animationRequest);
