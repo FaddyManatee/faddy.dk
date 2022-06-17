@@ -133,14 +133,13 @@ function Move() {
         // Vertically downwards
         gradient = -10000;
     }
-    else {
-        // Apply effects of gradient 
-        rectangle.x = rectangle.x + (vector.dx / Math.abs(vector.dx));
-        rectangle.y = rectangle.y + ((vector.dy / Math.abs(vector.dy)) * Math.abs(gradient));
-    }
 
     // Since gradient effects the speed of the animation, calculate a multiplier for consistent speed across all gradients (WIP)
-    var factor = 1;
+    var factor = 1; // (Math.pow(Math.abs(gradient), -1)) * 10 / ((canvas.height / Math.abs(gradient)) / 60);
+    
+    // Apply effects of gradient 
+    rectangle.x = rectangle.x + ((vector.dx / Math.abs(vector.dx)) * factor);
+    rectangle.y = rectangle.y + ((vector.dy / Math.abs(vector.dy)) * Math.abs(gradient) * factor);
 
     // Decrement the vector accordingly
     if (vector.dx > 0) {
@@ -151,10 +150,10 @@ function Move() {
     }
 
     if (vector.dy > 0) {
-        vector.dy = (vector.dy - gradient) * factor;
+        vector.dy = (vector.dy - (gradient * factor));
     }
     else if (vector.dy < 0) {
-        vector.dy = (vector.dy + gradient) * factor;
+        vector.dy = (vector.dy + (gradient * factor));
     }
 
     // TEST
@@ -166,8 +165,7 @@ function Move() {
      Floor and ceil functions on rectangle.y as it may become decimal due to the gradient, 
      otherwise the animation will continue until the vector translation is complete
     */
-    if (rectangle.x + rectangle.w == canvas.width || Math.ceil(rectangle.y) + rectangle.h == canvas.height || 
-        Math.floor(rectangle.y) + rectangle.h == canvas.height) {
+    if (rectangle.x <= 0 || rectangle.y <= 0 || rectangle.x + rectangle.w >= canvas.width - 1 || rectangle.y + rectangle.h >= canvas.height - 1) {
         // The rectangle has hit an edge of the canvas
 
         // STATS
