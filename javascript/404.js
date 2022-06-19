@@ -1,24 +1,27 @@
 /**
  * The goal of this script is to imitate the "Bouncing DVD logo" effect 
  */
-
 var canvas;
 var animationRequest;
 var rectangle;
-var point;
-var gradient;
+
+// Translation = Vector, and translation can be edited by Move()
+var vector;
+var translation;
+
 var factor;
+var gradient;
 var g;
 
 // TEST
 var initial;
-var count = 1;
 // TEST/
 
 // STATS
 var start;
 var finish;
 // STATS/
+
 
 $(document).ready(function() {
     // Retrieve the canvas object to manipulate
@@ -34,21 +37,25 @@ $(document).ready(function() {
     // Draw a test rectangle
     rectangle = RandomRectangle(125, 125);
 
-    // Initial point to move the rectangle towards to initiate the animation
-    point = RandomPoint();
+    // Initial vector to move the rectangle along to initiate the animation
+    vector = RandomVector();
+    translation = vector;
 
-    // Calculate the gradient of the line that connects the point to the position of the rectangle 
-    gradient = (rectangle.y - point.y) / (rectangle.x - point.x);
+    // Calculate the gradient of the vector relative to the rectangle
+    gradient = ((rectangle.y + vector.dy) - rectangle.y) / ((rectangle.x + vector.dx) - rectangle.x);
+
+    // Since gradient effects the speed of the animation, calculate a multiplier for consistent speed across all gradients (WIP)
+    factor = CalculateFactor();
 
     // STATS
     start = new Date();
     // STATS/
 
     // Perform the animation
-    
-    // Since gradient effects the speed of the animation, calculate a multiplier for consistent speed across all gradients (WIP)
-    factor = CalculateFactor(200);
-    animationRequest = window.requestAnimationFrame(Move);    
+    animationRequest = window.requestAnimationFrame(Move);
+
+    // Calculate a new vector to perform the bounce and repeat
+    // ...
 });
 
 
@@ -74,12 +81,12 @@ function RandomRectangle(width, height) {
 }
 
 
-// Generates a random coordinate for the rectangle to move towards in which it will hit a canvas edge
-function RandomPoint() {
+// Generates a random vector for the rectangle to move along in which it will hit a canvas edge
+function RandomVector() {
     // Pick a random edge
     var edge = Math.floor(Math.random() * 4);
-
     var rndPoint;
+
     switch (edge) {
         case 0:
             // Pick a random point along the top edge
@@ -114,11 +121,13 @@ function RandomPoint() {
     g.moveTo(rectangle.x, rectangle.y);
     // TEST/
 
-    return intersection;
+    // Calculate the vector that brings the rectangle to the intersection and return it
+    // intersection - rectangle
+    return {dx: intersection.x - rectangle.x, dy: intersection.y - rectangle.y};
 }
 
 
-// Moves the rectangle along the gradient until the rectangle collides with an edge
+// Moves the rectangle along the vector v until the translation is complete or the rectangle collides with an edge
 function Move() {
     g.beginPath();
     g.fillStyle = "rgba(0, 0, 0, 0)";
@@ -134,19 +143,23 @@ function Move() {
         gradient = -10000;
     }
 
-    // Apply effects of gradient. Move towards the edge with the intersection/point
-    if (point.x < rectangle.x) {
-        rectangle.x = rectangle.x - factor;
+    // Apply effects of gradient 
+    rectangle.x = rectangle.x + ((translation.dx / Math.abs(translation.dx)) * factor);
+    rectangle.y = rectangle.y + ((translation.dy / Math.abs(translation.dy)) * Math.abs(gradient) * factor);
+
+    // Decrement the vector accordingly
+    if (translation.dx > 0) {
+        translation.dx = translation.dx - factor;
     }
-    else if (point.x > rectangle.x) {
-        rectangle.x = rectangle.x + factor;
+    else if (translation.dx < 0) {
+        translation.dx = translation.dx + factor;
     }
 
-    if (point.y < rectangle.y) {
-        rectangle.y = rectangle.y - (Math.abs(gradient) * factor);
+    if (translation.dy > 0) {
+        translation.dy = (translation.dy - (gradient * factor));
     }
-    else if (point.y > rectangle.y) {
-        rectangle.y = rectangle.y + (Math.abs(gradient) * factor);
+    else if (translation.dy < 0) {
+        translation.dy = (translation.dy + (gradient * factor));
     }
 
     // TEST
@@ -154,8 +167,9 @@ function Move() {
     g.stroke();
     // TEST/
 
-    // Check that the rectangle has hit an edge of the canvas
     if (rectangle.x <= 0 || rectangle.y <= 0 || rectangle.x + rectangle.w >= canvas.width - 1 || rectangle.y + rectangle.h >= canvas.height - 1) {
+        // The rectangle has hit an edge of the canvas
+
         // STATS
         console.log("Gradient: " + gradient);
         finish = new Date();
@@ -165,16 +179,30 @@ function Move() {
         console.log("Distance: " + distance + "px");
         console.log("Time: " + time + "s");
         console.log("Speed: " + speed + "px/s");
-        console.log("Frames: " + count);
         $("#gradient").text(gradient);
         $("#speed").text(speed);
         // STATS/
-
+        cancelAnimationFrame(animationRequest);
+    }
+    else if (translation.dx == 0 || translation.dy == 0) {
+        // Vector translation is complete. The animation has ended
+        
+        // STATS
+        console.log("Gradient: " + gradient);
+        finish = new Date();
+        var time = (finish.getTime() - start.getTime()) / 1000;
+        var distance = Math.sqrt(Math.pow(rectangle.x - initial.x, 2) + Math.pow(rectangle.y - initial.y, 2));
+        var speed = distance / time; 
+        console.log("Distance: " + distance + "px");
+        console.log("Time: " + time + "s");
+        console.log("Speed: " + speed + "px/s");
+        $("#gradient").text(gradient);
+        $("#speed").text(speed);
+        // STATS/
         cancelAnimationFrame(animationRequest);
     }
     else {
         requestAnimationFrame(Move);
-        count++;
     }
 }
 
