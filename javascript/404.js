@@ -40,15 +40,15 @@ $(document).ready(function() {
     // Calculate the gradient of the line that connects the point to the position of the rectangle 
     gradient = (rectangle.y - point.y) / (rectangle.x - point.x);
 
-    // Since gradient effects the speed of the animation, calculate a multiplier for consistent speed across all gradients (WIP)
-    factor = 1; // CalculateFactor(200);
-
     // STATS
     start = new Date();
     // STATS/
 
     // Perform the animation
-    animationRequest = window.requestAnimationFrame(Move);
+    
+    // Since gradient effects the speed of the animation, calculate a multiplier for consistent speed across all gradients (WIP)
+    factor = CalculateFactor(200);
+    animationRequest = window.requestAnimationFrame(Move);    
 });
 
 
@@ -175,5 +175,16 @@ function Move() {
     else {
         requestAnimationFrame(Move);
         count++;
+    }
+}
+
+
+// (WIP) Approximation for consistent animation speeds regardless of gradient
+function CalculateFactor() {
+    if (Math.abs(gradient) >= 1) {
+        return Math.abs(Math.pow(gradient, -1));
+    }
+    else {
+        return Math.abs(gradient) * (Math.pow(Math.abs(gradient), -1));
     }
 }
