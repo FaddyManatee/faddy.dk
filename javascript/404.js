@@ -4,6 +4,8 @@
 var canvas;
 var g;
 var rectangle;
+var image = new Image();
+image.src = "images/ascii404.png";
 var animationRequest;
 
 var gradient;
@@ -24,9 +26,12 @@ $(document).ready(function() {
 
     // Graphics drawing context setup
     g = canvas.getContext("2d");
+    g.fillStyle = "black";
+    g.fillRect(0, 0, g.canvas.width, g.canvas.height);
 
     // Draw a test rectangle
-    rectangle = RandomRectangle(125, 125);
+    rectangle = RandomRectangle(206, 278);
+    g.drawImage(image, rectangle.x, rectangle.y, 206, 278);
 
     // Initial vector to move the rectangle along to initiate the animation
     vector = RandomVector();
@@ -59,8 +64,8 @@ function RandomRectangle(width, height) {
     rndColumn = Math.floor(Math.random() * (canvas.width - width));
 
     // Draw the rectangle
-    g.rect(rndColumn, rndRow, width, height);
-    g.stroke();
+    // g.rect(rndColumn, rndRow, width, height);
+    // g.stroke();
 
     // Return its properties
     return {x: rndColumn, y: rndRow, w: width, h: height};
@@ -108,7 +113,7 @@ function RandomVector() {
 // Moves the rectangle along the vector v until the translation is complete or the rectangle collides with an edge
 function Move() {
     g.beginPath();
-    g.clearRect(0, 0, g.canvas.width, g.canvas.height);
+    g.fillRect(0, 0, g.canvas.width, g.canvas.height);
     
     // Handle vertical lines
     if (gradient == Infinity) {
@@ -144,10 +149,7 @@ function Move() {
         translation.dy = (translation.dy + (gradient * factor));
     }
 
-    // TEST
-    g.rect(rectangle.x, rectangle.y, rectangle.w, rectangle.h);
-    g.stroke();
-    // TEST/
+    g.drawImage(image, rectangle.x, rectangle.y, 206, 278);
 
     // The rectangle has hit an edge of the canvas or the vector translation is complete
     if (rectangle.x <= 0 || rectangle.y <= 0 || rectangle.x + rectangle.w >= canvas.width - 1 || rectangle.y + rectangle.h >= canvas.height - 1 || (translation.dx == 0 && translation.dy == 0)) {
