@@ -4,9 +4,9 @@
 var canvas;
 var g;
 var rectangle;
+
 var image = new Image();
-image.src = "images/ascii404.png";
-var animationRequest;
+image.src = "images/ascii404compactreduced.png";
 
 var gradient;
 var factor;
@@ -25,20 +25,20 @@ $(document).ready(function() {
     canvas.height = $(window).height();
 
     // Graphics drawing context setup
-    g = canvas.getContext("2d");
+    g = canvas.getContext("2d", {alpha: false});
     g.fillStyle = "black";
     g.fillRect(0, 0, g.canvas.width, g.canvas.height);
 
-    // Draw a test rectangle
-    rectangle = RandomRectangle(206, 278);
-    g.drawImage(image, rectangle.x, rectangle.y, 206, 278);
+    // Draw initial image
+    rectangle = RandomRectangle(221, 335);
+    g.drawImage(image, Math.floor(rectangle.x), Math.floor(rectangle.y));
 
     // Initial vector to move the rectangle along to initiate the animation
     vector = RandomVector();
 
     // Scale the vector to ensure it causes the rectangle to hit an edge when we change its direction on rebounds
-    vector.dx = vector.dx * 1000;
-    vector.dy = vector.dy * 1000;
+    vector.dx = vector.dx * 10000;
+    vector.dy = vector.dy * 10000;
 
     // Store a copy of the vector we can manipulate
     translation = vector;
@@ -50,7 +50,7 @@ $(document).ready(function() {
     factor = CalculateFactor();
 
     // Perform the animation
-    animationRequest = window.requestAnimationFrame(Move);
+    window.requestAnimationFrame(Move);
 });
 
 
@@ -113,7 +113,7 @@ function RandomVector() {
 // Moves the rectangle along the vector v until the translation is complete or the rectangle collides with an edge
 function Move() {
     g.beginPath();
-    g.fillRect(0, 0, g.canvas.width, g.canvas.height);
+    g.fillRect(rectangle.x - 1, rectangle.y - 1, rectangle.w + 1, rectangle.h + 1);
     
     // Handle vertical lines
     if (gradient == Infinity) {
@@ -149,13 +149,11 @@ function Move() {
         translation.dy = (translation.dy + (gradient * factor));
     }
 
-    g.drawImage(image, rectangle.x, rectangle.y, 206, 278);
+    g.drawImage(image, Math.floor(rectangle.x), Math.floor(rectangle.y));
 
     // The rectangle has hit an edge of the canvas or the vector translation is complete
-    if (rectangle.x <= 0 || rectangle.y <= 0 || rectangle.x + rectangle.w >= canvas.width - 1 || rectangle.y + rectangle.h >= canvas.height - 1 || (translation.dx == 0 && translation.dy == 0)) {
-        // Calculate a new vector to perform the bounce and repeat
+    if (rectangle.x <= 0 || rectangle.y <= 0 || rectangle.x + rectangle.w >= canvas.width - 1 || rectangle.y + rectangle.h >= canvas.height - 1 || (translation.dx == 0 && translation.dy == 0))
         Rebound();
-    }
 
     requestAnimationFrame(Move);
 }
@@ -163,11 +161,13 @@ function Move() {
 
 // (WIP) Approximation for consistent animation speeds regardless of gradient
 function CalculateFactor() {
+    var speed = 2.5;
+
     if (Math.abs(gradient) >= 1) {
-        return Math.abs(Math.pow(gradient, -1));
+        return Math.abs(Math.pow(gradient, -1)) * speed;
     }
     else {
-        return Math.abs(gradient) * (Math.pow(Math.abs(gradient), -1));
+        return Math.abs(gradient) * (Math.pow(Math.abs(gradient), -1)) * speed;
     }
 }
 
@@ -181,7 +181,6 @@ function Rebound() {
         vector.dy = -vector.dy;
     }
 
-    gradient = -gradient;
-
     translation = vector;
+    gradient = -gradient;
 }
