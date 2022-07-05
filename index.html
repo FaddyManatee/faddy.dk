@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" manifest="offline.appcache">
+  <head>
+    <title>Terminal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="javascript/terminal.js"></script>
+    <script src="javascript/affine.js"></script>
+    <script src="javascript/vigenere.js"></script>
+    <script src="javascript/gameoflife.js"></script>
+    <script src="javascript/wordsearch.js"></script>
+    <link rel="stylesheet" href="css/terminalstyles.css"/>
+  </head>
+
+  <body>
+    <div id="rotatescreen">
+      <div>
+        <p class="error">Make sure to use landscape display</p>
+      </div>
+    </div>
+    <main>
+      <audio id="ambience" loop>
+        <source src="sounds/computer-idle-ambient-loop-001-8420.mp3" type="audio/mp3">
+        Your browser does not support the audio element
+      </audio>
+      <p id="clock" class="display"></p>
+      <p id="program" class="display"></p>
+      <p id="quit">SHUTTING DOWN -</p>
+      <div id="files" class="folder">
+        <div id="home">
+          <table>
+            <tr id="readmefile" tabindex="0">
+              <td class="left">readme.txt</td>
+              <td class="right">--FILE-&gt;</td>
+            </tr>
+
+            <tr id="cowsayfile" tabindex="0">
+              <td class="left">cowsay.txt</td>
+              <td class="right">--FILE-&gt;</td>
+            </tr>
+
+            <tr id="conwayfile" tabindex="0">
+              <td class="left">conway.exe</td>
+              <td class="right">--FILE-&gt;</td>
+            </tr>
+
+            <tr id="wordsearchfile" tabindex="0">
+              <td class="left">wrdsrch.exe</td>
+              <td class="right">--FILE-&gt;</td>
+            </tr>
+
+            <tr id="quitfile" tabindex="0">
+              <td class="left">quit.exe</td>
+              <td class="right">--FILE-&gt;</td>
+            </tr>
+          </table>
+
+          <hr>
+
+          <table>
+            <tr id="ciphersfolder" tabindex="0">
+              <td class="left">CIPHERS</td>
+              <td class="right">&gt;FOLDER&lt;</td>
+            </tr>
+
+            <tr id="settingsfolder" tabindex="0">
+              <td class="left">SETTINGS</td>
+              <td class="right">&gt;FOLDER&lt;</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- New Directory -->
+        <div id="ciphers">
+          <table>
+            <tr id="cipherstohome" tabindex="0">
+              <td class="left">/..</td>
+              <td class="right">&lt;UP-FOL&gt;</td>
+            </tr>
+
+            <tr id="affinefile" tabindex="0">
+              <td class="left">affine.exe</td>
+              <td class="right">--FILE-&gt;</td>
+            </tr>
+
+            <tr id="vigenerefile" tabindex="0">
+              <td class="left">vigenere.exe</td>
+              <td class="right">--FILE-&gt;</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- New Directory -->
+        <div id="settings">
+          <table>
+            <tr id="settingstohome" tabindex="0">
+              <td class="left">/..</td>
+              <td class="right">&lt;UP-FOL&gt;</td>
+            </tr>
+
+            <tr id="themefile" tabindex="0">
+              <td class="left">theme.cfg</td>
+              <td class="right">&gt;------&lt;</td>
+            </tr>
+
+            <tr id="soundfile" tabindex="0">
+              <td class="left">sound.cfg</td>
+              <td class="right">&gt;------&lt;</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="content">
+        <table id="iteminfo">
+          <tr>
+            <td id="name" class="left"></td>
+            <td id="type" class="right"></td>
+          </tr>
+        </table>
+        <article id="readmeui">
+          <h2 class="filetop">readme.txt</h2>
+          <div class="marquee"><pre class="white">
+╦ ╦╔═╗╦  ╔═╗╔═╗╔╦╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦  ╔═╗╦╔╦╗╔═╗
+║║║║╣ ║  ║  ║ ║║║║║╣    ║ ║ ║  ║║║╚╦╝  ╚═╗║ ║ ║╣ 
+╚╩╝╚═╝╩═╝╚═╝╚═╝╩ ╩╚═╝   ╩ ╚═╝  ╩ ╩ ╩   ╚═╝╩ ╩ ╚═╝
+          </pre></div>
+          
+          <div class="logos">
+            <a id="linkedin" class="blue" href="https://uk.linkedin.com/in/thomas-morton-40b72622a">
+              <p>LinkedIn</p>
+              <pre>
+
+
+
+-=================-
+++=::=+++++++++++++
+++-  .+++++++++++++
+++=--=+=--=----++++
+++=  .+:        =++
+++=  .+:  :++.  -++
+++=  .+:  -++:  -++
+++=  .+:  -++:  -++
+-+=--=+=--=++=--=+-
+              </pre>
+            </a>
+
+            <a id="gitlab" class="orange" href="https://gitlab.com/thomasmorton">
+              <p>GitLab</p>
+              <pre>
+
+
+   -            -   
+  .*+          +*.  
+  +**:        :***  
+ -****        ****- 
+ =++++********++++=.
+-==++++******++++==-
+ :===+++*****++===: 
+   .:=++****++=:.   
+      .-+**+-.      
+         ::         
+              </pre>
+            </a>
+
+            <a id="github" class="white" href="https://github.com/FaddyManatee">
+              <p>GitHub</p>
+              <pre>
+
+
+     :=+****+=:     
+  .+############+.  
+ =##=.-+====+-.=##= 
+-###-          -###-
+###+            +###
+###*            *###
+=##%=          =%##=
+ +#==#*=    =*####+ 
+  -#+:-.    =####-  
+    :=*-    -*=:    
+              </pre>
+            </a>
+
+            <a id="discord" class="indigo" href="https://discord.com/users/376325277208543232/">
+              <p>Discord</p>
+              <pre>
+
+
+
+    .::-:....:-::.    
+   -==============-   
+  -================-  
+ -====-:-====-:-====- 
+ ====-   :==-   -==== 
+.=====:.:====:.:=====.
+.====-==========-====.
+  :-==:  ....  :==-:  
+              </pre>
+            </a>
+          </div>
+
+          <p>
+            Hi. My name is Thomas and I'm a Computer Science undergraduate at the University of Leeds
+            as of September 2021. I've also studied the subject at both GCSE and A-Level
+            qualifications with grades 8 and A respectively.
+          </p>
+
+          <p>
+            Programming languages I use frequently include C, Java, and JavaScript. Much of my past
+            programming experience before University involved a lot of C# and had been back-end
+            focused. More recently, I have been writing HTML, CSS, and JavaScript with jQuery to
+            explore more of what the front-end world involves and to produce this website.
+          </p>
+
+          <p>
+            Here you can find some small programs I have written for this webpage which I ported from
+            languages I used to originally write them in, for instance Python anc C#. It's design is
+            inspired from the game SuperHot and it's terminal-like user interface. Feel free to
+            navigate the mock file system on the left and interact with the programs.
+          </p>
+
+          <p>
+            I hope you enjoy :)
+          </p>
+
+          <p class="right">
+            - Thomas
+          </p>
+        </article>
+
+        <article id="cowsayui">
+          <h2 class="filetop">cowsay.txt</h2>
+          <pre class="white">
+  ________________________________________  
+/ Did you ever hear the tragedy of Darth   \
+| Plagueis The Wise? I thought not. It's   |
+| not a story the Jedi would tell you.     |
+| It's a Sith legend. Darth Plagueis was   |
+| a Dark Lord of the Sith, so powerful and |
+| so wise he could use the Force to        |
+| influence the midichlorians to create    |
+| life. He had such a knowledge of the     |
+| dark side that he could even keep the    |
+| ones he cared about from dying. The dark |
+| side of the Force is a pathway to many   |
+| abilities some consider to be unnatural. |
+| He became so powerful, the only thing    |
+| he was afraid of was losing his power,   |
+| which eventually, of course, he did.     |
+| Unfortunately, he taught his apprentice  |
+| everything he knew, then his apprentice  |
+| killed him in his sleep. Ironic. He      |
+| could save others from death, but not    |
+\ himself.                                 /
+  ----------------------------------------  
+         \   ^__^                           
+          \  (oo)\_______                   
+             (__)\       )\/\               
+                 ||----w |                  
+                 ||     ||                  
+          </pre>
+        </article>
+
+        <div id="affineui" class="left">
+          <h2 class="filetop">Press ESC to exit</h2>
+          <form autocomplete="off" spellcheck="false">
+            <div class="formpair">
+              <input type="text" id="affineinput">
+              <label for="affineinput">Text</label>
+            </div>
+            
+            <div class="formpair">
+              <input type="text" id="affinekeyainput">
+              <label for="affinekeyainput">A key</label>
+            </div>
+
+            <div class="formpair">
+              <input type="text" id="affinekeybinput">
+              <label for="affinekeybinput">B key</label>
+            </div>
+          </form>
+          <button id="affineencrypt" type="button">Encrypt</button>
+          <button id="affinedecrypt" type="button">Decrypt</button>
+
+          <p class="error" id="affineerror"></p>
+          <pre id="affineoutput" class="output"></pre>
+        </div>
+
+        <div id="vigenereui" class="left">
+          <h2 class="filetop">Press ESC to exit</h2>
+          <form autocomplete="off" spellcheck="false">
+            <div class="formpair">
+              <input type="text" id="vigenereinput">
+              <label for="vigenereinput">Text</label>
+            </div>
+            
+            <div class="formpair">
+              <input type="text" id="vigenerekeyinput">
+              <label for="vigenerekeyinput">Key</label>
+            </div>
+          </form>
+          <button id="vigenereencrypt" type="button">Encrypt</button>
+          <button id="vigeneredecrypt" type="button">Decrypt</button>
+
+          <p class="error" id="vigenereerror"></p>
+          <pre id="vigenereoutput" class="output"></pre>
+        </div>
+
+        <div id="conwayui" class="left">
+          <h2 class="filetop">Press ESC to exit</h2>
+          <form autocomplete="off" spellcheck="false">
+            <div class="formpair">
+              <input type="text" id="rowinputconway">
+              <label for="rowinputconway">Rows</label>
+            </div>
+
+            <div class="formpair">
+              <input type="text" id="columninputconway">
+              <label for="columninputconway">Columns</label>
+            </div>
+
+            <div class="formpair">
+              <input type="range" id="speedinput" min="0" max="6" value="3">
+              <label for="speedinput">Speed</label>
+            </div>
+          </form>
+          <button type="button" id="conwaymakegrid">GRID</button>
+          <button type="button" id="startbutton">START</button>
+          <button type="button" id="pausebutton">PAUSE</button>
+          <p class="error" id="conwayerror"></p>
+          <div id="conwaygrid" class="conway"></div>
+        </div>
+
+        <div id="wordsearchui" class="left">
+          <h2 class="filetop">Press ESC to exit</h2>
+          <form autocomplete="off" spellcheck="false">
+            <div class="formpair">
+              <input type="text" id="rowinputsearch">
+              <label for="rowinputsearch">Rows</label>
+            </div>
+            
+            <div class="formpair">
+              <input type="text" id="columninputsearch">
+              <label for="columninputsearch">Columns</label>
+            </div>
+
+            <div class="formpair">
+              <input type="text" id="searchinput">
+              <label for="searchinput">Word</label>
+            </div>
+          </form>
+          <button type="button" id="searchmakegrid">GRID</button>
+          <button type="button" id="searchforword">SEARCH</button>
+          <p class="error" id="wordsearcherror"></p>
+          <div id="wordsearchgrid" class="wordsearch"></div>
+        </div>
+      </div>
+
+      <footer>
+        <table>
+          <tr>
+            <td id="directory" class="left">C:\</td>
+            <td id="unsupported" class="right"></td>
+          </tr>
+        </table>
+        <p class="display" id="osname">Omni-piOS-v2.1.01p</p>
+      </footer>
+    </main>
+  </body>
+</html>

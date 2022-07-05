@@ -1,0 +1,575 @@
+/* Implementation of custom font */
+@font-face {
+    font-family: fixedsys;
+    src: url(../fonts/fsex300.ttf);
+}
+
+/* Variables that contain the values of common colours and fills to be used */
+:root, :root.light {
+    --terminallightblue: #86d2f6;
+    --terminalblue: #004cff;
+    --terminalindigo: #383fff;
+    --terminalorange: #cd2414;
+    --terminaldarkred: #bf1138;
+    --terminalred: #b50122;
+    --terminalgreen: #4caf50;
+    --terminalblack: #000000;
+    --terminalwhite: #efefef;
+    --terminalgrey: #6b6b6b;
+
+    --linewidth: 0.3vw;
+    --fontfamily: fixedsys, "Courier New", Courier, monospace;
+    --fontsize: 1.7vw;
+    --textshadow: none;
+    --boxshadow: none;
+    --fontweight: 900;
+}
+
+:root.dark {
+    --terminalblue: #5285fc;
+    --terminalindigo: #5d63ff;
+    --terminalorange: #ff7b00;
+    --terminalwhite: #000000;
+    --terminalblack: #efefef;
+    --terminalgrey: #979797;
+    --textshadow: 0px 0px 0.4vw;
+    --boxshadow: 0px 0px 0.5vw 0.1vw;
+    --fontweight: normal;
+}
+
+/* Override variables if browser is in dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --terminalwhite: #000000;
+        --terminalblack: #efefef;
+        --terminalgrey: #979797;
+        --textshadow: 0px 0px 0.4vw;
+        --boxshadow: 0px 0px 1vw 0.5vw;
+        --fontweight: normal;
+    }
+}
+
+::selection {
+    color: var(--terminalwhite);
+    background-color: var(--terminalblack);
+}
+
+/* Scrollbars for Firefox and future proofing */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--terminalblack) var(--terminalwhite);
+}
+
+::-webkit-scrollbar {
+    width: 1.15vw;
+}
+  
+::-webkit-scrollbar-track {
+    appearance: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--terminalblack);
+    border: var(--linewidth) solid var(--terminalwhite);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--terminalwhite);
+}
+
+html {
+    height: 80%;
+}
+
+body {
+    font-family: var(--fontfamily);
+    font-size: var(--fontsize);
+    color: var(--terminalblack);
+    margin: 0px;
+
+    /* Stacking shadows for a larger glow effect */
+    text-shadow: var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue);
+    background-color: var(--terminalwhite);
+}
+
+body, main, main > div {
+    height: 100%;
+}
+
+#rotatescreen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    background-color: var(--terminalwhite);
+}
+
+#rotatescreen div {
+    position: relative;
+    width: 100%;
+}
+
+#rotatescreen p {
+    font-size: calc(var(--fontsize) + 3vw);
+    margin: auto;
+    margin-top: 45vh;
+}
+
+main {
+    width: 80%;
+    margin: auto auto;
+    padding: 2% 0px 2% 0px;
+    position: relative;
+}
+
+div.folder {
+    width: 25%;
+    border: var(--linewidth) solid var(--terminalgrey);
+    border-bottom: none;
+    border-right: none;
+    padding: 1% 0.5%;
+    float: left;
+    
+    background-image: linear-gradient(var(--terminalgrey), var(--terminalgrey));
+    background-size: var(--linewidth) 100%;
+    background-repeat: no-repeat;
+    background-position: 63.5%;
+}
+
+div.content {
+    width: 70.75%;
+    text-align: center;
+    color: var(--terminalgrey);
+    text-shadow: none;
+    border: var(--linewidth) solid var(--terminalgrey);
+    border-bottom: none;
+    padding: 1%;
+    float: left;
+
+    /* Only show horizontal and vertical scrollbars in sections if required */
+    overflow: auto;
+}
+
+div.content #cowsayui pre {
+    color: var(--terminalgrey);
+    text-shadow: none;
+}
+
+footer {
+    /* Width not 100% to account for padding */
+    width: 97.15%;
+    border: var(--linewidth) solid var(--terminalgrey);
+    clear: left;
+    padding: 1%;
+    position: relative;
+}
+
+.content p {
+    clear: left;
+    margin: 4% 0% 0% 0%;
+}
+
+.fullscreen {
+    /* Width not 100% to account for padding */
+    width: 97.15% !important;
+}
+
+div table, footer table {
+    border-collapse: collapse;
+    padding: 0px;
+    width: 100%;
+}
+
+div td, footer td {
+    padding: 0px;
+}
+
+footer td {
+    width: 50%;
+}
+
+div.folder tr:hover, tr:focus {
+    outline: none;
+    cursor: pointer;
+    background-color: var(--terminaldarkred);
+    text-shadow: none;
+}
+
+div.folder td:first-child {
+    width: 64%;
+    border-right: var(--linewidth) solid var(--terminalblack);
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+p, pre {
+    margin: 0px;
+}
+
+.filetop {
+    font-size: var(--fontsize);
+    font-weight: normal;
+    text-align: center;
+    margin: 0px;
+    left: 57%;
+}
+
+#readmeui p {
+    clear: left;
+}
+
+/* Use for any ASCII art */
+pre {
+    /* http://www.patorjk.com/software/taag/#p=display&f=Calvin%20S&t= */
+    font-family: var(--fontfamily);
+    margin: 0px;
+}
+
+/* Maruqee effects without deprecated <marquee> tag (You'll be missed dearly) */
+.marquee {
+    font-weight: normal;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.marquee > pre {
+    font-size: calc(var(--fontsize) + 2vw);
+    -moz-animation: marquee 10s linear infinite;
+    -webkit-animation: marquee 10s linear infinite;
+    animation: marquee 10s linear infinite;
+}
+
+@-moz-keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-165%);
+    }
+}
+
+@-webkit-keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-165%);
+    }
+}
+
+@keyframes marquee {
+    0% {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%)
+    }
+    100% {
+        -moz-transform: translateX(-165%);
+        -webkit-transform: translateX(-165%);
+        transform: translateX(-165%);
+    }
+}
+
+div.logos {
+    width: 80%;
+    margin: 0px auto 20%;
+}
+
+div.logos > a {
+    width: 22%;
+    text-decoration: none;
+    font-weight: var(--fontweight);
+    float: left;
+    margin: 0px 2%;
+    position: relative;
+
+    /* Make the a tag behave like a block level element */
+    display: block;
+}
+
+div.logos > a:first-child {
+    margin: 0px 2% 0px 0px;
+}
+
+div.logos > a:last-child {
+    margin: 0px 0px 0px 2%;
+}
+
+div.logos pre {
+    font-size: calc(var(--fontsize) - 0.8vw);
+}
+
+/* Horizontally centre position the absolute p elements, parent container needs defined width */
+div.logos p {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;;
+}
+
+.blue {
+    color: var(--terminalblue);
+    text-shadow: var(--textshadow) var(--terminalblue), var(--textshadow) var(--terminalblue), var(--textshadow) var(--terminalblue);
+}
+
+.orange {
+    color: var(--terminalorange);
+    text-shadow: var(--textshadow) var(--terminalorange), var(--textshadow) var(--terminalorange), var(--textshadow) var(--terminalorange);
+}
+
+.indigo {
+    color: var(--terminalindigo);
+    text-shadow: var(--textshadow) var(--terminalindigo), var(--textshadow) var(--terminalindigo), var(--textshadow) var(--terminalindigo);  
+}
+
+.white {
+    color: var(--terminalblack);
+    text-shadow: var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue);
+}
+
+#quit {
+    color: var(--terminalred);
+    font-size: calc(var(--fontsize) + 0.5vw);
+    text-shadow: var(--textshadow) var(--terminalred), var(--textshadow) var(--terminalred), var(--textshadow) var(--terminalred);
+    background-color: var(--terminalwhite);
+    position: absolute;
+    top: 45%;
+    left: 35%;
+    border: var(--linewidth) solid var(--terminalred);
+    padding: 3% 6%;
+    box-shadow: var(--boxshadow) var(--terminalred);
+}
+
+.display {
+    background-color: var(--terminalwhite);
+    position: absolute;
+}
+
+#program {
+    left: 5%;
+    top: 1.4ch;
+}
+
+#clock {
+    left: 91%;
+    top: 1.4ch;
+}
+
+#unsupported {
+    color: var(--terminalred);
+    text-shadow: var(--textshadow) var(--terminalred), var(--textshadow) var(--terminalred), var(--textshadow) var(--terminalred);
+}
+
+#osname {
+    left: 77%;
+}
+
+.error {
+    color: var(--terminalred);
+    padding: 1%;
+    width: fit-content;
+    border: var(--linewidth) solid var(--terminalred);
+    box-shadow: var(--boxshadow) var(--terminalred);
+    text-shadow: var(--textshadow) var(--terminaldarkred), var(--textshadow) var(--terminaldarkred), var(--textshadow) var(--terminaldarkred);
+    margin: 1% 1% 1% 0px;
+}
+
+hr {
+    color: var(--terminalgrey);
+    margin: 4% 1% 4%;
+    border-style: dashed none none none;
+    border-width: var(--linewidth);
+}
+
+form {
+    margin-top: 1%;
+    margin-left: 0.5%;
+}
+
+div.formpair {
+    width: 20%;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+label {
+    margin: 0.5%;
+    float: left;
+    display: block;
+}
+
+input, button {
+    font-family: var(--fontfamily);
+    font-size: var(--fontsize);
+    color: var(--terminalblack);
+    margin: 0.5%;
+
+    /* Stacking shadows for a larger glow effect */
+    text-shadow: var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue);
+}
+
+input[type=text] {
+    color: var(--terminalgrey);
+    text-shadow: none;
+    background-color: var(--terminalwhite);
+    border: var(--linewidth) solid var(--terminalgrey);
+    padding: 1%;
+    width: 80%;
+}
+
+input[type=text]:hover, input[type=text]:focus {
+    color: var(--terminalblack);
+    text-shadow: var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue);
+    outline: none;
+    border: var(--linewidth) solid var(--terminalblack);
+    box-shadow: var(--boxshadow) var(--terminallightblue);
+}
+
+input[type=range] {
+    appearance: none;
+    width: 70%;
+    background-color: var(--terminalwhite);
+    border: var(--linewidth) solid var(--terminalgrey);
+}
+
+input[type=range]:hover, input[type=range]:focus {
+    appearance: none;
+    outline: none;
+    background-color: var(--terminalwhite);
+    border: var(--linewidth) solid var(--terminalblack);
+    box-shadow: var(--boxshadow) var(--terminallightblue);
+}
+
+input[type=range]::-webkit-slider-thumb {
+    appearance: none;
+    background-color: var(--terminalgrey);
+    padding: 10%;
+    width: 10%;
+}
+
+input[type=range]:hover::-webkit-slider-thumb, input[type=range]:focus::-webkit-slider-thumb {
+    appearance: none;
+    background-color: var(--terminalblack);
+    padding: 10%;
+    box-shadow: var(--boxshadow) var(--terminallightblue);
+}
+
+button {
+    width: 10%;
+    padding: 0.5%;
+    background-color: var(--terminalwhite);
+    outline: none;
+    border: var(--linewidth) solid var(--terminalblack);
+    box-shadow: var(--boxshadow) var(--terminallightblue);
+    display: inline-block;
+}
+
+button:hover {
+    border: var(--linewidth) solid var(--terminalred);
+    background-color: var(--terminalred);
+    box-shadow: var(--boxshadow) var(--terminalred);
+}
+
+button:focus {
+    border: var(--linewidth) solid var(--terminalred);
+    background-color: var(--terminalred);
+    box-shadow: var(--boxshadow) var(--terminalred);
+}
+
+input:hover + label {
+    color: var(--terminalblack);
+
+    /* Stacking shadows for a larger glow effect */
+    text-shadow: var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue);
+}
+
+input:focus + label {
+    color: var(--terminalblack);
+
+    /* Stacking shadows for a larger glow effect */
+    text-shadow: var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue);
+}
+
+pre.output {
+    margin: 0.5%;
+}
+
+/* We want a border around the table and no gaps between buttons */
+.conway table {
+    width: unset;
+    border-collapse: collapse;
+    margin: 0.5%;
+    border: 0.2vw solid var(--terminalblack);
+    box-shadow: var(--boxshadow) var(--terminallightblue);
+}
+
+.conway td {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+    padding: 0px;
+}
+
+/* Make buttons fill entirety of table cell with no border */
+.conway button {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    display: block;
+    box-shadow: none;
+}
+
+.conway button.alive {
+    background-color: var(--terminalblack);
+}
+
+.conway button.dead {
+    background-color: var(--terminalwhite);
+}
+
+/* Highlight dead cells in Conway's grid upon hover and focus */
+.conway button.dead:hover, .conway button.dead:focus {
+    background-color: var(--terminalgrey);
+}
+
+.wordsearch table {
+    width: unset;
+    border: none;
+    margin: 0.5%;
+    border-collapse: collapse;
+    box-shadow: var(--boxshadow) var(--terminallightblue);
+}
+
+.wordsearch td {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0px;
+    border: 0.2vw solid var(--terminalblack);
+}
+
+.wordsearch input[type=text] {
+    width: 100%;
+    height: 100%;
+    color: var(--terminalblack);
+    text-shadow: var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue), var(--textshadow) var(--terminallightblue);
+    margin: 0px;
+    border: none;
+    padding: 0px;
+    text-align: center;
+}
+
+/* Flagged cells in the wordsearch (Contiguous characters that formed the search word) */
+.wordsearch input[type=text].flagged {
+    background-color: var(--terminalgreen);
+}
