@@ -498,6 +498,14 @@ $(document).ready(function() {
         }
     }
 
+    // Play a mouse click sound when the user clicks with their mouse.
+    // https://pixabay.com/sound-effects/logitech-computer-mouse-click-95725/
+    var clickSound = new Audio("../sounds/logitech-computer-mouse-click-95725.mp3")
+    $(document).click(function() {
+        if (soundEnabled)
+            clickSound.play();
+    });
+
     // Switch between dark and light modes.
     function toggleTheme() {
         if (!lightTheme && !($(":root").hasClass("light") || $(":root").hasClass("dark"))) {
