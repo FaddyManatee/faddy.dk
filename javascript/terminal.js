@@ -56,10 +56,17 @@ $(document).ready(function() {
 
             // Redirect to previous page after certain amount of animation cycles completed.
             if (frames / 4 == 10) {
+                fallbackUrl = "https://www.google.com/";
+                var prevPage = window.location.href;
+            
                 window.history.back();
-                
-                // If there is no previous page, fallback to some default webpage.
-                window.location.assign("https://www.google.com/");
+            
+                // Fallback to a default if no previous page in the history after 2 seconds.
+                setTimeout(function() { 
+                    if (window.location.href == prevPage) {
+                        window.location.href = fallbackUrl; 
+                    }
+                }, 2000);
             }
         }
     }
