@@ -339,6 +339,7 @@ div.logos p {
     text-shadow: var(--textshadow) var(--terminalred), var(--textshadow) var(--terminalred), var(--textshadow) var(--terminalred);
     background-color: var(--terminalwhite);
     position: absolute;
+    z-index: 1;
     top: 45%;
     left: 35%;
     border: var(--linewidth) solid var(--terminalred);
