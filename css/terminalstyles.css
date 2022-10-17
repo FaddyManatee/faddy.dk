@@ -54,10 +54,13 @@
     background-color: var(--terminalblack);
 }
 
-/* Scrollbars for Firefox and future proofing */
 * {
+    /* Scrollbars for Firefox and future proofing */
     scrollbar-width: thin;
     scrollbar-color: var(--terminalblack) var(--terminalwhite);
+    
+    /* Custom cursor applies to all elements */
+    cursor: url("../images/cursor.cur") 10 16, auto;
 }
 
 ::-webkit-scrollbar {
