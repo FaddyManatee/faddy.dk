@@ -1,5 +1,6 @@
 $(document).ready(function() {
     setTheme();
+    birthday();
     hideAllDirectories();
     hideAllUI();
     $("#rotatescreen").hide();
@@ -574,6 +575,18 @@ $(document).ready(function() {
             $(":root").removeClass("light");
             $(":root").removeClass("dark");
             $(":root").addClass(theme);
+        }
+    }
+
+    // Birthday
+    function birthday() {
+        var birthday = new Date(2003, 02, 26);
+        var today = new Date();
+
+        if (today.getMonth() != birthday.getMonth() ||
+            today.getDate() != birthday.getDate()) 
+        {
+            $("#birthday").hide();
         }
     }
 
