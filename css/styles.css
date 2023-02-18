@@ -504,6 +504,10 @@ pre.output {
     margin: 0.5%;
 }
 
+.conway button, .conway td {
+    cursor: default;
+}
+
 /* We want a border around the table and no gaps between buttons */
 .conway table {
     width: unset;

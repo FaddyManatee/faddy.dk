@@ -118,31 +118,33 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#name").text("app: conway.exe");
-            $("#type").text("|--FILE->1609");
+            $("#type").text("|--FILE-\u200c>1609");
             $("#iteminfo").show();
         },
 
         mouseleave: function() {
             $("#iteminfo").hide();
+
+            if ($("#conwayui").is(":hidden")) {
+                $("readmeui").show();
+            }
         },
 
         click: function() {
             fullScreen("#conwayui");
-            $("#conwayui").show();
             $("#program").text("conway.exe");
         },
 
         focus: function() {
             hideAllUI();
             $("#name").text("app: conway.exe");
-            $("#type").text("|--FILE->1609");
+            $("#type").text("|--FILE-\u200c>1609");
             $("#iteminfo").show();
         },
     
         keyup: function(event) {
             if (event.key == "Enter") {
                 fullScreen("#conwayui");
-                $("#conwayui").show();
                 $("#program").text("conway.exe");
             }
         }
@@ -153,7 +155,7 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#name").text("app: wrdsrch.exe");
-            $("#type").text("|--FILE->1505");
+            $("#type").text("|--FILE-\u200c>1505");
             $("#iteminfo").show();
         },
 
@@ -170,7 +172,7 @@ $(document).ready(function() {
         focus: function() {
             hideAllUI();
             $("#name").text("app: wrdsrch.exe");
-            $("#type").text("|--FILE->1505");
+            $("#type").text("|--FILE-\u200c>1505");
             $("#iteminfo").show();
         },
     
@@ -188,7 +190,7 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#name").text("app: quit.exe");
-            $("#type").text("|--FILE->0192");
+            $("#type").text("|--FILE-\u200c>0192");
             $("#iteminfo").show();
         },
 
@@ -203,7 +205,7 @@ $(document).ready(function() {
         focus: function() {
             hideAllUI();
             $("#name").text("app: quit.exe");
-            $("#type").text("|--FILE->0192");
+            $("#type").text("|--FILE-\u200c>0192");
             $("#iteminfo").show();
         },
     
@@ -251,7 +253,7 @@ $(document).ready(function() {
         }
     });
 
-    // CIPHERS -> HOME interface.
+    // CIPHERS -\u200c> HOME interface.
     $("#cipherstohome").on({
         mouseenter: function() {
             hideAllUI();
@@ -287,7 +289,7 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#name").text("app: affine.exe");
-            $("#type").text("|--FILE->1201");
+            $("#type").text("|--FILE-\u200c>1201");
             $("#iteminfo").show();
         },
 
@@ -304,7 +306,7 @@ $(document).ready(function() {
         focus: function() {
             hideAllUI();
             $("#name").text("app: affine.exe");
-            $("#type").text("|--FILE->1201");
+            $("#type").text("|--FILE-\u200c>1201");
             $("#iteminfo").show();
         },
     
@@ -322,7 +324,7 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#name").text("app: vigenere.exe");
-            $("#type").text("|--FILE->1314");
+            $("#type").text("|--FILE-\u200c>1314");
             $("#iteminfo").show();
         },
 
@@ -339,7 +341,7 @@ $(document).ready(function() {
         focus: function() {
             hideAllUI();
             $("#name").text("app: vigenere.exe");
-            $("#type").text("|--FILE->1314");
+            $("#type").text("|--FILE-\u200c>1314");
             $("#iteminfo").show();
         },
     
@@ -363,6 +365,7 @@ $(document).ready(function() {
 
         mouseleave: function() {
             $("#iteminfo").hide();
+            $("#readmeui").show();
         },
 
         click: function() {
@@ -389,7 +392,7 @@ $(document).ready(function() {
         }
     });
 
-    // SETTINGS -> HOME interface.
+    // SETTINGS -\u200c> HOME interface.
     $("#settingstohome").on({
         mouseenter: function() {
             hideAllUI();
