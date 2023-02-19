@@ -119,7 +119,7 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#name").text("app: conway.exe");
-            $("#type").text("|--FILE-\u200c>1609");
+            $("#type").text("|-\u200c-FILE-\u200c>1609");
             $("#iteminfo").show();
         },
 
@@ -139,7 +139,7 @@ $(document).ready(function() {
         focus: function() {
             hideAllUI();
             $("#name").text("app: conway.exe");
-            $("#type").text("|--FILE-\u200c>1609");
+            $("#type").text("|-\u200c-FILE-\u200c>1609");
             $("#iteminfo").show();
         },
     
@@ -156,7 +156,7 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#name").text("app: wrdsrch.exe");
-            $("#type").text("|--FILE-\u200c>1505");
+            $("#type").text("|-\u200c-FILE-\u200c>1505");
             $("#iteminfo").show();
         },
 
@@ -173,7 +173,7 @@ $(document).ready(function() {
         focus: function() {
             hideAllUI();
             $("#name").text("app: wrdsrch.exe");
-            $("#type").text("|--FILE-\u200c>1505");
+            $("#type").text("|-\u200c-FILE-\u200c>1505");
             $("#iteminfo").show();
         },
     
@@ -191,7 +191,7 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#name").text("app: quit.exe");
-            $("#type").text("|--FILE-\u200c>0192");
+            $("#type").text("|-\u200c-FILE-\u200c>0192");
             $("#iteminfo").show();
         },
 
@@ -206,7 +206,7 @@ $(document).ready(function() {
         focus: function() {
             hideAllUI();
             $("#name").text("app: quit.exe");
-            $("#type").text("|--FILE-\u200c>0192");
+            $("#type").text("|-\u200c-FILE-\u200c>0192");
             $("#iteminfo").show();
         },
     
@@ -290,7 +290,7 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#name").text("app: affine.exe");
-            $("#type").text("|--FILE-\u200c>1201");
+            $("#type").text("|-\u200c-FILE-\u200c>1201");
             $("#iteminfo").show();
         },
 
@@ -307,7 +307,7 @@ $(document).ready(function() {
         focus: function() {
             hideAllUI();
             $("#name").text("app: affine.exe");
-            $("#type").text("|--FILE-\u200c>1201");
+            $("#type").text("|-\u200c-FILE-\u200c>1201");
             $("#iteminfo").show();
         },
     
@@ -325,7 +325,7 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#name").text("app: vigenere.exe");
-            $("#type").text("|--FILE-\u200c>1314");
+            $("#type").text("|-\u200c-FILE-\u200c>1314");
             $("#iteminfo").show();
         },
 
@@ -342,7 +342,7 @@ $(document).ready(function() {
         focus: function() {
             hideAllUI();
             $("#name").text("app: vigenere.exe");
-            $("#type").text("|--FILE-\u200c>1314");
+            $("#type").text("|-\u200c-FILE-\u200c>1314");
             $("#iteminfo").show();
         },
     
