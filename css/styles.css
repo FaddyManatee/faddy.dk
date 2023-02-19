@@ -544,8 +544,8 @@ pre.output {
     background-color: var(--terminalwhite);
 }
 
-/* Highlight dead cells in Conway's grid upon hover and focus */
-.conway button.dead:hover, .conway button.dead:focus {
+/* Highlight dead cells in Conway's grid upon hover */
+.conway button.dead:hover {
     background-color: var(--terminalgrey);
 }
 

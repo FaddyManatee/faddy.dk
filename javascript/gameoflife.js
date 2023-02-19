@@ -75,7 +75,7 @@ $(document).ready(function() {
             var row = document.createElement("tr");
             for (var y = 0; y < gridColumns; y++) {
                 var cell = document.createElement("td");
-                cell.innerHTML = "<button type=\"button\" title=\"Cell\" class=\"dead\" id=\"conway" + x + "_" + y + "\" " + "onclick=\"toggle(" + x + ", " + y + ")\"" + "></button>";
+                cell.innerHTML = "<button type=\"button\" class=\"dead\" id=\"conway" + x + "_" + y + "\" " + "onclick=\"toggle(" + x + ", " + y + ")\"" + "></button>";
                 row.appendChild(cell);
             }
             table.appendChild(row);

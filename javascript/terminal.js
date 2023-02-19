@@ -366,7 +366,6 @@ $(document).ready(function() {
 
         mouseleave: function() {
             $("#iteminfo").hide();
-            $("#readmeui").show();
         },
 
         click: function() {
