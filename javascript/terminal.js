@@ -579,8 +579,12 @@ $(document).ready(function() {
 
     // Birthday
     function birthday() {
-        var birthday = new Date(2003, 02, 26);
+        var birthday = new Date(2003, 1, 26);  // 26/02/2003
         var today = new Date();
+
+        console.log(today.getMonth());
+        console.log(birthday.getMonth());
+        console.log(birthday)
 
         if (today.getMonth() != birthday.getMonth() ||
             today.getDate() != birthday.getDate()) 
