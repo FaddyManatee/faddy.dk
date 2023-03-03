@@ -22,7 +22,8 @@
         
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js" integrity="sha512-ju6u+4bPX50JQmgU97YOGAXmRMrD9as4LE05PdC3qycsGQmjGlfm041azyB1VfCXpkpt1i9gqXCT6XuxhBJtKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="javascript/terminal.js"></script>
     <script src="javascript/affine.js"></script>
     <script src="javascript/vigenere.js"></script>
@@ -38,10 +39,6 @@
       </div>
     </div>
     <main>
-      <audio id="ambience" loop>
-        <source src="sounds/computer-idle-ambient-loop-001-8420.mp3" type="audio/mp3">
-        Your browser does not support the audio element
-      </audio>
       <p id="clock" class="display"></p>
       <p id="program" class="display"></p>
       <p id="quit">SHUTTING DOWN -</p>
@@ -55,6 +52,11 @@
 
             <tr id="cowsayfile" tabindex="0">
               <td class="left">cowsay.txt</td>
+              <td class="right">-&zwnj;-FILE-&zwnj;&gt;</td>
+            </tr>
+
+            <tr id="streamfile" tabindex="0">
+              <td class="left">stream.mov</td>
               <td class="right">-&zwnj;-FILE-&zwnj;&gt;</td>
             </tr>
 
@@ -290,6 +292,12 @@
           </pre>
         </article>
 
+        <div id="streamui">
+          <h2 class="filetop">stream.mov</h2>
+          <iframe src="https://player.twitch.tv/?channel=unlimitedsteam&parent=faddy.dk&parent=www.faddy.dk" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
+          <p>Not my stream, but I perhaps find it too funny...</p>
+        </div>
+
         <div id="affineui" class="left">
           <h2 class="filetop">Press ESC to exit</h2>
           <form autocomplete="off" spellcheck="false">
@@ -396,7 +404,7 @@
       </footer>
     </main>
     <div id="birthday">
-      <img src="https://i.gifer.com/W9k1.gif"/>
+      <img src="images/confetti.gif"/>
     </div>
   </body>
 </html>

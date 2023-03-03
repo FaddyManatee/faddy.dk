@@ -10,8 +10,15 @@ $(document).ready(function() {
     $(".logos p").hide();
 
     var lightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
-    var soundEnabled = false;
     var isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+    var ambience = new Howl({
+        src: ["sounds/computer-idle-ambient-loop-001-8420.mp3"],
+        volume: 0.3,
+        autoplay: false,
+        loop: true
+      });
+    var soundEnabled = false;
 
     if (isMobile) {
         $("#rotatescreen").show();
@@ -183,6 +190,27 @@ $(document).ready(function() {
                 $("#wordsearchui").show();
                 $("#program").text("wrdsrch.exe");
             }
+        }
+    });
+
+    // stream.mov interface.
+    $("#streamfile").on({
+        mouseenter: function() {
+            hideAllUI();
+            $("#streamui").show();
+            $("#program").text("");
+        },
+
+        click: function() {
+            hideAllUI();
+            $("#streamui").show();
+            $("#program").text("");
+        },
+
+        focus: function() {
+            hideAllUI();
+            $("#streamui").show();
+            $("#program").text("");
         }
     });
 
@@ -489,13 +517,12 @@ $(document).ready(function() {
     // https://pixabay.com/sound-effects/computer-idle-ambient-loop-001-8420/
     function toggleSound() {
         if (soundEnabled == false) {
-            $("audio")[0].volume = 0.2;
-            $("audio").trigger("play");
+            ambience.play();
             soundEnabled = true;
             $("#soundfile > .right").text(">" + "\xa0\xa0" + "ON" + "\xa0\xa0" + "<");
         }
         else {
-            $("audio").trigger("pause");
+            ambience.pause();
             soundEnabled = false;
             $("#soundfile > .right").text("> OFF" + "\xa0\xa0" + "<");
         }
@@ -579,12 +606,8 @@ $(document).ready(function() {
 
     // Birthday
     function birthday() {
-        var birthday = new Date(2003, 1, 26);  // 26/02/2003
+        var birthday = new Date(2003, 1, 26);  // 26-02-2003
         var today = new Date();
-
-        console.log(today.getMonth());
-        console.log(birthday.getMonth());
-        console.log(birthday)
 
         if (today.getMonth() != birthday.getMonth() ||
             today.getDate() != birthday.getDate()) 
@@ -658,6 +681,7 @@ $(document).ready(function() {
         $("#vigenereui").hide();
         $("#conwayui").hide();
         $("#wordsearchui").hide();
+        $("#streamui").hide();
     }
 
     function hideAllDirectories() {

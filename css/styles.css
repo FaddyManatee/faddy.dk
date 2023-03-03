@@ -596,3 +596,9 @@ pre.output {
     height: 100%;
     object-fit: fill;
 }
+
+iframe {
+    margin-top: 1%;
+    width: 100%;
+    height: 65vh;
+}
