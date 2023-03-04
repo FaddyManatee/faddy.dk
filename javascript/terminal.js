@@ -79,6 +79,17 @@ $(document).ready(function() {
         }
     }
 
+    // Hide/show the dot matrix overlay on hover event over the stream.
+    $("#stream").on({
+        mouseenter: function() {
+            $(this).find("img").remove()
+        },
+
+        mouseleave: function() {
+            $(this).append("<img src=\"images/dots.png\">");
+        }
+    });
+
     // readme.txt interface.
     $("#readmefile").on({
         mouseenter: function() {

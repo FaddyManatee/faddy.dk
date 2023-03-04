@@ -604,10 +604,10 @@ pre.output {
 
 #stream img {
     position: absolute;
+    pointer-events: visible;
     overflow: hidden;
-    pointer-events: none;
     width: 100%;
-    height: 500px;
+    height: 100%;
     left: 0;
     top: 0;
     object-fit: fill;
