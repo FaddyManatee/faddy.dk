@@ -6,7 +6,7 @@ var g;
 var rectangle;
 
 var image = new Image();
-image.src = "images/favicon.png";
+image.src = "images/404.png";
 
 var gradient;
 var factor;

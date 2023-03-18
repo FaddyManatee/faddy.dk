@@ -191,7 +191,7 @@ footer td {
     width: 50%;
 }
 
-div.folder tr:hover, tr:focus {
+div.folder tr:hover {
     outline: none;
     cursor: pointer;
     background-color: var(--terminaldarkred);
