@@ -1,8 +1,10 @@
 $(document).ready(function() {
+    var dots = "";
     setTheme();
     birthday();
     hideAllDirectories();
     hideAllUI();
+    $("#stream img").attr("src", dots);
     $("#rotatescreen").hide();
     $("#quit").hide();
     $("#home").show();
@@ -86,7 +88,7 @@ $(document).ready(function() {
         },
 
         mouseleave: function() {
-            $(this).append("<img src=\"images/dots.png\">");
+            $(this).append(`<img src=\"${dots}\">`);
         }
     });
 
@@ -554,25 +556,30 @@ $(document).ready(function() {
             $(":root").addClass("light");
             recordThemePreference("light");
             $("#themefile > .right").text(">LIGHT <");
+            dots = "../images/dots-light.png";
         }
         else if (lightTheme && !($(":root").hasClass("light") || $(":root").hasClass("dark"))) {
             // Override automatic light theme.
             $(":root").addClass("dark");
             recordThemePreference("dark");
             $("#themefile > .right").text("> DARK <");
+            dots = "../images/dots-dark.png";
         }
         else if ($(":root").hasClass("light")) {
             $(":root").removeClass("light");
             $(":root").addClass("dark");
             recordThemePreference("dark");
             $("#themefile > .right").text("> DARK <");
+            dots = "../images/dots-dark.png";
         }
         else if ($(":root").hasClass("dark")) {
             $(":root").removeClass("dark");
             $(":root").addClass("light");
             recordThemePreference("light");
             $("#themefile > .right").text(">LIGHT <");
+            dots = "../images/dots-light.png";
         }
+        $("#stream img").attr("src", dots);
     }
 
     // Store theme preference to local storage.
@@ -612,6 +619,7 @@ $(document).ready(function() {
             $(":root").removeClass("light");
             $(":root").removeClass("dark");
             $(":root").addClass(theme);
+            dots = `../images/dots-${theme}.png`;
         }
     }
 
