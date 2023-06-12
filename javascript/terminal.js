@@ -210,18 +210,21 @@ $(document).ready(function() {
         mouseenter: function() {
             hideAllUI();
             $("#streamui").show();
+            $("#stream").show();
             $("#program").text("");
         },
 
         click: function() {
             hideAllUI();
             $("#streamui").show();
+            $("#stream").show();
             $("#program").text("");
         },
 
         focus: function() {
             hideAllUI();
             $("#streamui").show();
+            $("#stream").show();
             $("#program").text("");
         }
     });
@@ -687,6 +690,7 @@ $(document).ready(function() {
     });
 
     function hideAllUI() {
+        $("#stream").hide();
         $("#iteminfo").hide();
         $("#readmeui").hide();
         $("#cowsayui").hide();
