@@ -640,11 +640,11 @@ $(document).ready(function() {
         $("#linkedin p").hide();
     });
 
-    $("#gitlab").hover(function() {
-        $("#gitlab p").show();
+    $("#email").hover(function() {
+        $("#email p").show();
     },
     function() {
-        $("#gitlab p").hide();
+        $("#email p").hide();
     });
 
     $("#github").hover(function() {

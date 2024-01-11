@@ -9,7 +9,6 @@
     --terminallightblue: #86d2f6;
     --terminalblue: #004cff;
     --terminalindigo: #383fff;
-    --terminalorange: #cd2414;
     --terminaldarkred: #bf1138;
     --terminalred: #b50122;
     --terminalgreen: #4caf50;
@@ -28,7 +27,6 @@
 :root.dark {
     --terminalblue: #5285fc;
     --terminalindigo: #5d63ff;
-    --terminalorange: #ff7b00;
     --terminalwhite: #000000;
     --terminalblack: #efefef;
     --terminalgrey: #979797;
@@ -316,14 +314,30 @@ div.logos p {
     right: 0;;
 }
 
+/* Colours for logos and terminal text */
+.mail-r {
+    color: #ea4335;
+    text-shadow: var(--textshadow) #ea4335, var(--textshadow) #ea4335, var(--textshadow) #ea4335; 
+}
+
+.mail-dr {
+    color: #c5221f;
+    text-shadow: var(--textshadow) #c5221f, var(--textshadow) #c5221f, var(--textshadow) #c5221f; 
+}
+
+.mail-y {
+    color: #fbbc04;
+    text-shadow: var(--textshadow) #fbbc04, var(--textshadow) #fbbc04, var(--textshadow) #fbbc04; 
+}
+
+.mail-g {
+    color: #34a853;
+    text-shadow: var(--textshadow) #34a853, var(--textshadow) #34a853, var(--textshadow) #34a853; 
+}
+
 .blue {
     color: var(--terminalblue);
     text-shadow: var(--textshadow) var(--terminalblue), var(--textshadow) var(--terminalblue), var(--textshadow) var(--terminalblue);
-}
-
-.orange {
-    color: var(--terminalorange);
-    text-shadow: var(--textshadow) var(--terminalorange), var(--textshadow) var(--terminalorange), var(--textshadow) var(--terminalorange);
 }
 
 .indigo {
