@@ -3,7 +3,7 @@ $(document).ready(function() {
     birthday();
     hideAllDirectories();
     hideAllUI();
-    $("#stream img").attr("src", "../images/dots.png");
+    $("#stream img").attr("src", "../images/scanlines.png");
     $("#rotatescreen").hide();
     $("#quit").hide();
     $("#home").show();
@@ -87,7 +87,7 @@ $(document).ready(function() {
         },
 
         mouseleave: function() {
-            $(this).append(`<img src=\"../images/dots.png\">`);
+            $(this).append(`<img src=\"../images/scanlines.png\">`);
         }
     });
 
@@ -616,7 +616,7 @@ $(document).ready(function() {
             $(":root").removeClass("light");
             $(":root").removeClass("dark");
             $(":root").addClass(theme);
-            dots = `../images/dots-${theme}.png`;
+            scanlines = `../images/scanlines-${theme}.png`;
         }
     }
 
