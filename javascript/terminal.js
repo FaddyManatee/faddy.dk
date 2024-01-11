@@ -12,13 +12,6 @@ $(document).ready(function() {
 
     var lightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
     var isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
-
-    var ambience = new Howl({
-        src: ["sounds/computer-idle-ambient-loop-001-8420.mp3"],
-        volume: 0.3,
-        autoplay: false,
-        loop: true
-      });
     var soundEnabled = false;
 
     if (isMobile) {
@@ -532,12 +525,13 @@ $(document).ready(function() {
     // https://pixabay.com/sound-effects/computer-idle-ambient-loop-001-8420/
     function toggleSound() {
         if (soundEnabled == false) {
-            ambience.play();
+            $("audio")[0].volume = 0.2;
+            $("audio").trigger("play");
             soundEnabled = true;
             $("#soundfile > .right").text(">" + "\xa0\xa0" + "ON" + "\xa0\xa0" + "<");
         }
         else {
-            ambience.pause();
+            $("audio").trigger("pause");
             soundEnabled = false;
             $("#soundfile > .right").text("> OFF" + "\xa0\xa0" + "<");
         }

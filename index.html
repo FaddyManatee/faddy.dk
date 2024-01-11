@@ -23,7 +23,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js" integrity="sha512-ju6u+4bPX50JQmgU97YOGAXmRMrD9as4LE05PdC3qycsGQmjGlfm041azyB1VfCXpkpt1i9gqXCT6XuxhBJtKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="javascript/terminal.js"></script>
     <script src="javascript/affine.js"></script>
     <script src="javascript/vigenere.js"></script>
@@ -42,6 +41,10 @@
       </div>
     </div>
     <main>
+      <audio id="ambience" loop>
+        <source src="sounds/computer-idle-ambient-loop-001-8420.mp3" type="audio/mp3">
+        Your browser does not support the audio element
+      </audio>
       <p id="clock" class="display"></p>
       <p id="program" class="display"></p>
       <p id="quit">SHUTTING DOWN -</p>
