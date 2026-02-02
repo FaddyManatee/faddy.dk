@@ -3,8 +3,6 @@ $(document).ready(function() {
     birthday();
     hideAllDirectories();
     hideAllUI();
-    $("#stream img").attr("src", "../images/scanlines.png");
-    $("#rotatescreen").hide();
     $("#quit").hide();
     $("#home").show();
     $("#readmeui").show();
@@ -13,11 +11,6 @@ $(document).ready(function() {
     var lightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
     var isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
     var soundEnabled = false;
-
-    if (isMobile) {
-        $("#rotatescreen").show();
-        $("#rotatescreen").delay(3000).fadeOut();
-    }
 
     // Update contents of the clock every second.
     setInterval(clock, 1000);
@@ -72,17 +65,6 @@ $(document).ready(function() {
             }
         }
     }
-
-    // Hide/show the dot matrix overlay on hover event over the stream.
-    $("#stream").on({
-        mouseenter: function() {
-            $(this).find("img").remove()
-        },
-
-        mouseleave: function() {
-            $(this).append(`<img src=\"../images/scanlines.png\">`);
-        }
-    });
 
     // readme.txt interface.
     $("#readmefile").on({
@@ -195,30 +177,6 @@ $(document).ready(function() {
                 $("#wordsearchui").show();
                 $("#program").text("wrdsrch.exe");
             }
-        }
-    });
-
-    // stream.mov interface.
-    $("#streamfile").on({
-        mouseenter: function() {
-            hideAllUI();
-            $("#streamui").show();
-            $("#stream").show();
-            $("#program").text("");
-        },
-
-        click: function() {
-            hideAllUI();
-            $("#streamui").show();
-            $("#stream").show();
-            $("#program").text("");
-        },
-
-        focus: function() {
-            hideAllUI();
-            $("#streamui").show();
-            $("#stream").show();
-            $("#program").text("");
         }
     });
 
@@ -525,7 +483,8 @@ $(document).ready(function() {
     // https://pixabay.com/sound-effects/computer-idle-ambient-loop-001-8420/
     function toggleSound() {
         if (soundEnabled == false) {
-            $("audio")[0].volume = 0.2;
+            $("audio")[0].volume = 0.20;
+            $("audio")[1].volume = 0.15;
             $("audio").trigger("play");
             soundEnabled = true;
             $("#soundfile > .right").text(">" + "\xa0\xa0" + "ON" + "\xa0\xa0" + "<");
@@ -539,10 +498,22 @@ $(document).ready(function() {
 
     // Play a mouse click sound when the user clicks with their mouse.
     // https://pixabay.com/sound-effects/logitech-computer-mouse-click-95725/
-    var clickSound = new Audio("../sounds/logitech-computer-mouse-click-95725.mp3")
-    $(document).click(function() {
-        if (soundEnabled)
-            clickSound.play();
+    var clickSound = new Audio("../sounds/mouse-click.mp3");
+
+    function playSound() {
+        if (!soundEnabled) return;
+        clickSound.currentTime = 0;
+        clickSound.play();
+    }
+
+    // Any mouse click.
+    $(document).on("click", playSound);
+
+    // Escape key.
+    $(document).on("keydown", function (e) {
+        if (e.key === "Escape" || e.keyCode === 27) {
+            playSound();
+        }
     });
 
     // Switch between dark and light modes.
@@ -610,7 +581,6 @@ $(document).ready(function() {
             $(":root").removeClass("light");
             $(":root").removeClass("dark");
             $(":root").addClass(theme);
-            scanlines = `../images/scanlines-${theme}.png`;
         }
     }
 
@@ -684,7 +654,6 @@ $(document).ready(function() {
     });
 
     function hideAllUI() {
-        $("#stream").hide();
         $("#iteminfo").hide();
         $("#readmeui").hide();
         $("#cowsayui").hide();
@@ -692,7 +661,6 @@ $(document).ready(function() {
         $("#vigenereui").hide();
         $("#conwayui").hide();
         $("#wordsearchui").hide();
-        $("#streamui").hide();
     }
 
     function hideAllDirectories() {

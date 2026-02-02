@@ -2,14 +2,14 @@
 <html lang="en">
   <head>      
     <!-- HTML Meta Tags -->
-    <title>Thomas/Faddy - Developer | Student | Musician</title>
-    <meta name="description" content="The personal website of Thomas Morton, who goes by the pseudonym of 'FaddyManatee' online.">
+    <title>Thomas Morton | Developer</title>
+    <meta name="description" content="The personal website and portfolio of Thomas Morton">
 
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://faddy.dk">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Thomas/Faddy - Developer | Student | Musician">
-    <meta property="og:description" content="The personal website of Thomas Morton, who goes by the pseudonym of 'FaddyManatee' online.">
+    <meta property="og:description" content="The personal website and portfolio of Thomas Morton">
     <meta property="og:image" content="https://cdn.discordapp.com/attachments/810862843620098099/1029351304302166036/unknown.png">
 
     <!-- Twitter Meta Tags -->
@@ -17,7 +17,7 @@
     <meta property="twitter:domain" content="faddy.dk">
     <meta property="twitter:url" content="https://faddy.dk">
     <meta name="twitter:title" content="Thomas/Faddy - Developer | Student | Musician">
-    <meta name="twitter:description" content="The personal website of Thomas Morton, who goes by the pseudonym of 'FaddyManatee' online.">
+    <meta name="twitter:description" content="The personal website and portfolio of Thomas Morton">
     <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/810862843620098099/1029351304302166036/unknown.png">
         
     <meta charset="UTF-8">
@@ -35,15 +35,14 @@
   </head>
 
   <body>
-    <div id="rotatescreen">
-      <div>
-        <p class="error">Make sure to use landscape display</p>
-      </div>
-    </div>
     <main>
       <audio id="ambience" loop>
-        <source src="sounds/computer-idle-ambient-loop-001-8420.mp3" type="audio/mp3">
-        Your browser does not support the audio element
+        <source src="sounds/ambient-loop.mp3" type="audio/mp3">
+        Your browser does not support the audio element!
+      </audio>
+      <audio id="music" loop>
+        <source src="sounds/installation.mp3" type="audio/mp3">
+        Your browser does not support the audio element!
       </audio>
       <p id="clock" class="display"></p>
       <p id="program" class="display"></p>
@@ -58,11 +57,6 @@
 
             <tr id="cowsayfile" tabindex="0">
               <td class="left">cowsay.txt</td>
-              <td class="right">-&zwnj;-FILE-&zwnj;&gt;</td>
-            </tr>
-
-            <tr id="streamfile" tabindex="0">
-              <td class="left">stream.mov</td>
               <td class="right">-&zwnj;-FILE-&zwnj;&gt;</td>
             </tr>
 
@@ -227,28 +221,31 @@
           </div>
 
           <p>
-            Hello! My name is Thomas, and I'm a BSc Computer Science undergraduate at the University 
-            of Leeds since September 2021. I've also studied the subject at both GCSE and A-Level.
+            Hello! My name is Thomas, and I am a BSc Computer Science graduate from the University 
+            of Leeds, having completed my degree in December 2025. I have also studied Computer 
+            Science at both GCSE and A-level.
           </p>
 
           <p>
-            I'm interested in the study of artifical intelligence and machine learning technologies,
-            which help us to develop innovative solutions to challenging, real-world problems
-            and shape the world as we know it today. Other interests of mine include cyber security,
-            data structures and algorithms, cryptography, and operating systems. 
+            I am particularly interested in applying AI to develop innovative solutions to
+            non-intuitive, real-world problems. One example of this was my BSc dissertation, in 
+            which I used evolutionary algorithms to generate biological, tree-like structures that
+            satisfied predefined structural, mechanical, and hierarchical constraints. My broader
+            interests include cybersecurity, compilers, and operating systems.
           </p>
 
           <p>
-            When it comes to software development, I work on the back-end, where most of my programming
-            experience is in C, C++, Java, and Python. Some interesting projects that I have completed
-            during my time at university include CLI tools for image manipulation, a memory management
-            library for the UNIX xv6 operating system, and a compiler for the JACK programming language.
+            In software engineering, my focus is on back-end development, with the majority of my
+            programming experience in C, C++, Java, and Python. Notable university projects include
+            CLI tools for PGM image manipulation, a custom memory management library for the UNIX
+            xv6 operating system, and a compiler for the JACK programming language.
           </p>
 
           <p>
-            Here you can find some small programs I have written and decided to put on this website (which was
-            part of a project for one of my web development modules). The design is inspired from the game SuperHot.
-            Navigate the file system on the left to interact with them!
+            Here you can find a selection of projects I have written and chosen to showcase on this
+            website, which was developed as part of a web development module. The design is inspired
+            by the game SUPERHOT. Navigate the file system on the left to explore and interact with 
+            them.
           </p>
 
           <p>
@@ -292,15 +289,6 @@
                  ||     ||                  
           </pre>
         </article>
-
-        <div id="streamui">
-          <div class="filetop">stream.mov</div>
-          <div id="stream">
-            <img src="images/scanlines.png">
-            <iframe src="https://player.twitch.tv/?channel=memedhamsai&parent=faddy.dk&parent=www.faddy.dk" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
-          </div>
-          <p>Not my stream, but I find it funny enough to put here</p>
-        </div>
 
         <div id="affineui" class="left">
           <div class="filetop">Press ESC to exit</div>

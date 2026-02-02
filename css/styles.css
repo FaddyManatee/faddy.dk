@@ -64,6 +64,13 @@
 ::-webkit-scrollbar {
     width: 1.15vw;
 }
+
+/* Hide scrollbar arrows */
+::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
   
 ::-webkit-scrollbar-track {
     appearance: none;
@@ -95,25 +102,6 @@ body {
 
 body, main, main > div {
     height: 100%;
-}
-
-#rotatescreen {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 1;
-    background-color: var(--terminalwhite);
-}
-
-#rotatescreen div {
-    position: relative;
-    width: 100%;
-}
-
-#rotatescreen p {
-    font-size: calc(var(--fontsize) + 3vw);
-    margin: auto;
-    margin-top: 45vh;
 }
 
 main {
@@ -232,7 +220,7 @@ pre {
     margin: 0px;
 }
 
-/* Maruqee effects without deprecated <marquee> tag (You'll be missed dearly) */
+/* Maruqee effects without deprecated <marquee> tag (you'll be missed dearly) */
 .marquee {
     font-weight: normal;
     margin: 0px;
