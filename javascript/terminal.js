@@ -584,7 +584,7 @@ $(document).ready(function() {
         }
     }
 
-    // Birthday
+    // Birthday.
     function birthday() {
         var birthday = new Date(2003, 1, 26);  // 26-02-2003
         var today = new Date();
@@ -595,6 +595,15 @@ $(document).ready(function() {
             $("#birthday").hide();
         }
     }
+
+    // Reveal email.
+    $("#email").hover(function() {
+        $(this).attr("href", atob("bWFpbHRvOnRob21hc2FuZHJld21vcnRvbkBnbWFpbC5jb20="));
+    });
+
+    $("#email").onclick(function() {
+        $(this).attr("href", atob("bWFpbHRvOnRob21hc2FuZHJld21vcnRvbkBnbWFpbC5jb20="));
+    });
 
     // Show and hide names of logos on hover.
     $("#linkedin").hover(function() {
