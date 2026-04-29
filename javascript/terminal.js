@@ -601,7 +601,7 @@ $(document).ready(function() {
         $(this).attr("href", atob("bWFpbHRvOnRob21hc2FuZHJld21vcnRvbkBnbWFpbC5jb20="));
     });
 
-    $("#email").onclick(function() {
+    $("#email").click(function() {
         $(this).attr("href", atob("bWFpbHRvOnRob21hc2FuZHJld21vcnRvbkBnbWFpbC5jb20="));
     });
 
