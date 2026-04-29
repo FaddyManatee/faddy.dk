@@ -589,10 +589,10 @@ $(document).ready(function() {
         var birthday = new Date(2003, 1, 26);  // 26-02-2003
         var today = new Date();
 
-        if (today.getMonth() != birthday.getMonth() ||
-            today.getDate() != birthday.getDate()) 
+        if (today.getMonth() == birthday.getMonth() &&
+            today.getDate() == birthday.getDate()) 
         {
-            $("#birthday").hide();
+            $("#birthday").show();
         }
     }
 
