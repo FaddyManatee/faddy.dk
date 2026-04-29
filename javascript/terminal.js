@@ -24,6 +24,9 @@ $(document).ready(function() {
     var frames = 0;
     setInterval(shutdown, 50);
     function shutdown() {
+        if ($("#quit").is(":hidden"))
+            return
+
         var text = $("#quit").text();
 
         switch (text) {
