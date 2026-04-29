@@ -3,7 +3,6 @@ $(document).ready(function() {
     birthday();
     hideAllDirectories();
     hideAllUI();
-    $("#quit").hide();
     $("#home").show();
     $("#readmeui").show();
     $(".logos p").hide();
@@ -25,44 +24,42 @@ $(document).ready(function() {
     var frames = 0;
     setInterval(shutdown, 50);
     function shutdown() {
-        if ($("#quit").is(":visible")) {
-            var text = $("#quit").text();
+        var text = $("#quit").text();
 
-            switch (text) {
-                case "SHUTTING DOWN -":
-                    text = "SHUTTING DOWN \\";
-                    break;
+        switch (text) {
+            case "SHUTTING DOWN -":
+                text = "SHUTTING DOWN \\";
+                break;
                 
-                case "SHUTTING DOWN \\":
-                    text = "SHUTTING DOWN |";
-                    break; 
+            case "SHUTTING DOWN \\":
+                text = "SHUTTING DOWN |";
+                break; 
                 
-                case "SHUTTING DOWN |":
-                    text = "SHUTTING DOWN /";
-                    break; 
+            case "SHUTTING DOWN |":
+                text = "SHUTTING DOWN /";
+                break; 
 
-                case "SHUTTING DOWN /":
-                    text = "SHUTTING DOWN -";
-                    break; 
+            case "SHUTTING DOWN /":
+                text = "SHUTTING DOWN -";
+                break; 
             }
 
-            frames++;
-            $("#quit").text(text);
+        frames++;
+        $("#quit").text(text);
 
-            // Redirect to previous page after certain amount of animation cycles completed.
-            if (frames / 4 == 10) {
-                fallbackUrl = "https://www.google.com/";
-                var prevPage = window.location.href;
+        // Redirect to previous page after certain amount of animation cycles completed.
+        if (frames / 4 == 10) {
+            fallbackUrl = "https://www.google.com/";
+            var prevPage = window.location.href;
             
-                window.history.back();
+            window.history.back();
             
-                // Fallback to a default if no previous page in the history after 2 seconds.
-                setTimeout(function() { 
-                    if (window.location.href == prevPage) {
-                        window.location.href = fallbackUrl; 
-                    }
-                }, 2000);
-            }
+            // Fallback to a default if no previous page in the history after 2 seconds.
+            setTimeout(function() { 
+                if (window.location.href == prevPage) {
+                    window.location.href = fallbackUrl; 
+                }
+            }, 2000);
         }
     }
 
